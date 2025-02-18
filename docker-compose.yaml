@@ -1,16 +1,16 @@
-version: '3.8'
+version: "3.8"
 
 services:
   app-service:
     build: ./app-service
     container_name: commercial-contents-agent-app-service
-    ports: 
+    ports:
       - "8080:3000"
     environment:
       - PORT=3000
-    restart: always  
+    restart: always
   ui:
     build: ./ui
     container_name: commercial-contents-agent-ui
-    ports: 
+    ports:
       - "3000:3000"
