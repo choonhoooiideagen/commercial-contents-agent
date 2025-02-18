@@ -70,7 +70,20 @@ app.get("/messages/all", (_: Request, res: Response) => {
     },
     {
       sender: "Terry Crews",
-      content: "Looking forward to it, lol!",
+      content: `Looking forward to it, lol! Below is the list of contents that you can subscribe / purchase
+        #contents-list
+        {
+        "contents": [
+          {
+            "id": 1,
+            "title": "Learn Spanish",
+            "price": 10
+            
+          }
+        ]
+        }
+        #end-contents-list
+      `,
       timestamp: new Date("2023-10-02T09:00:00Z"),
     },
   ]);

@@ -16,17 +16,21 @@ import React, { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 const socket = io("http://localhost:8080"); // Adjust the URL as needed
 
-const ChatUI = () => {
-    const [messages, setMessages] = useState<
-        { sender: string; content: string; timestamp: Date }[]
-    >([]);
+interface Message {
+  sender: string;
+  content: string;
+  timestamp: Date;
+}
 
-    useEffect(() => {
-        fetch(`http://localhost:8080/messages/all`)
-            .then((response) => response.json())
-            .then((data) => {
+const ChatUI = () => {
+  const [messages, setMessages] = useState<Message[]>([]);
+
+  useEffect(() => {
+    fetch(`http://localhost:8080/messages/all`)
+      .then((response) => response.json())
+      .then((data) => {
         setMessages(
-          data.map((msg: unknown) => ({
+          data.map((msg: Message) => ({
             ...msg,
             timestamp: new Date(msg.timestamp),
           }))
@@ -82,32 +86,40 @@ const ChatUI = () => {
             <TypingIndicator content="Terry Crews is thinking" />
           }
         >
-          {messages.map((msg, index) => (
-            <React.Fragment key={index}>
-              {index === 0 ||
-              new Date(messages[index - 1].timestamp).toDateString() !==
-                new Date(msg.timestamp).toDateString() ? (
-                <MessageSeparator
-                  content={new Date(msg.timestamp).toDateString()}
-                />
-              ) : null}
-              <Message
-                model={{
-                  direction:
-                    msg.sender === "Terry Crews" ? "incoming" : "outgoing",
-                  message: msg.content,
-                  position: "single",
-                  sender: msg.sender,
-                  sentTime: new Date(msg.timestamp).toLocaleTimeString(),
-                }}
-              >
-                <Avatar
-                  name="Terry Crews"
-                  src="https://chatscope.io/storybook/react/assets/zoe-E7ZdmXF0.svg"
-                />
-              </Message>
-            </React.Fragment>
-          ))}
+          {messages.map((msg, index) => {
+            const match = msg.content.match(
+              /#contents-list([\s\S]*?)#end-contents-list/
+            );
+            let contents;
+            if (match !== null) contents = JSON.parse(match[1].trim()).contents;
+            console.log(contents);
+            return (
+              <React.Fragment key={index}>
+                {index === 0 ||
+                new Date(messages[index - 1].timestamp).toDateString() !==
+                  new Date(msg.timestamp).toDateString() ? (
+                  <MessageSeparator
+                    content={new Date(msg.timestamp).toDateString()}
+                  />
+                ) : null}
+                <Message
+                  model={{
+                    direction:
+                      msg.sender === "Terry Crews" ? "incoming" : "outgoing",
+                    message: msg.content,
+                    position: "single",
+                    sender: msg.sender,
+                    sentTime: new Date(msg.timestamp).toLocaleTimeString(),
+                  }}
+                >
+                  <Avatar
+                    name="Terry Crews"
+                    src="https://chatscope.io/storybook/react/assets/zoe-E7ZdmXF0.svg"
+                  />
+                </Message>
+              </React.Fragment>
+            );
+          })}
         </MessageList>
         <MessageInput
           autoFocus
