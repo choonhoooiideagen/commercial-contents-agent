@@ -1,0 +1,8 @@
+version: '3.8'
+
+services:
+  ui:
+    build: ./ui
+    container_name: commercial-contents-agent-ui
+    ports: 
+      - "3000:3000"
