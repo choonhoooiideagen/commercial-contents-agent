@@ -1,0 +1,6 @@
+# model_id="anthropic.claude-3-5-sonnet-20240620-v1:0"
+model_id="apac.anthropic.claude-3-5-sonnet-20240620-v1:0"
+agent_id="8GYU7RT6I1"
+agent_alias_id="OQPGCAVWHS"
+aws_profile="hackathon2025"
+aws_region="ap-southeast-2"
