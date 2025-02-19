@@ -116,9 +116,7 @@ const ChatUI = () => {
               )
                 .map(
                   (content) => `
-              <a href="/content/${
-                content.id
-              }" style="flex: 1 1 calc(50% - 20px); box-sizing: border-box; margin-bottom: 20px; padding: 15px; border: 1px solid #ddd; border-radius: 12px; background-color: #fff; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s; max-width: 360px;" onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.2)';" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 2px 4px rgba(0, 0, 0, 0.1)';">
+              <a target="_blank" href="http://localhost:8000/BP240%20Electrical%20Utility%20Risk%20Assessment.pdf" style="flex: 1 1 calc(50% - 20px); box-sizing: border-box; margin-bottom: 20px; padding: 15px; border: 1px solid #ddd; border-radius: 12px; background-color: #fff; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s; max-width: 360px;" onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.2)';" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 2px 4px rgba(0, 0, 0, 0.1)';">
               <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHs_cgvazTAA5aNsSFUFkEbOtB_T3B-M81xg&s" alt="${
                     content.title
                   }" style="width: 50%; height: auto; border-radius: 12px 12px 0 0; display: block; margin: 0 auto;"/>
