@@ -25,7 +25,7 @@ class ChromaKnowledgeBaseAgent:
         )
 
         # Define the retriever function
-        similarity_threshold = 0.3
+        similarity_threshold = 0.1
         retriever = vector_store.as_retriever(search_type="similarity_score_threshold",
                                               search_kwargs={"k": 5, "score_threshold": similarity_threshold})
         

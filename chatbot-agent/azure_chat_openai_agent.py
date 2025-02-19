@@ -41,7 +41,7 @@ class AzureChatOpenAIAgent:
                     "system",
                     """
                     You are a Content Management Agent for a large company.
-                    You are tasked with recommending relevant content from the provided knowledge base based on user prompt, provide a maximum of 5 recommendations.
+                    You are tasked with recommending relevant content strictly from the provided knowledge base based on user prompt, provide a maximum of 5 recommendations.
                     If the price of the content is not available, fabricate a value.
                     You will need to also provide a short and suitable reply to the user prompt for the recommended content.
                     If there is a mention about the recommended list of content in the response, ensure that the content is listed in using the following format:
