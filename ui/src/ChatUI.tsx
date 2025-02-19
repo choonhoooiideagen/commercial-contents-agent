@@ -9,7 +9,6 @@ import {
   VoiceCallButton,
   VideoCallButton,
   InfoButton,
-  TypingIndicator,
   MessageSeparator,
 } from "@chatscope/chat-ui-kit-react";
 import React, { useEffect, useState } from "react";
@@ -119,22 +118,22 @@ const ChatUI = () => {
                   (content) => `
               <a href="/content/${
                 content.id
-              }" style="flex: 1 1 calc(50% - 20px); box-sizing: border-box; margin-bottom: 20px; padding: 15px; border: 1px solid #ddd; border-radius: 12px; background-color: #fff; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.2)';" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 2px 4px rgba(0, 0, 0, 0.1)';">
+              }" style="flex: 1 1 calc(50% - 20px); box-sizing: border-box; margin-bottom: 20px; padding: 15px; border: 1px solid #ddd; border-radius: 12px; background-color: #fff; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s; max-width: 360px;" onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.2)';" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 2px 4px rgba(0, 0, 0, 0.1)';">
               <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHs_cgvazTAA5aNsSFUFkEbOtB_T3B-M81xg&s" alt="${
                     content.title
-                  }" style="width: 50%; height: auto; border-radius: 12px 12px 0 0;"/>
+                  }" style="width: 50%; height: auto; border-radius: 12px 12px 0 0; display: block; margin: 0 auto;"/>
               <h3 style="margin: 10px 0; font-size: 1.2em; color: #333; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${
                 content.title
               }</h3>
               <p style="margin: 0 0 10px 0; font-size: 1em; color: #666;">Price: <span style="font-weight: bold; color: #000;">$${
                 content.price
               }</span></p>
-              <p style="margin: 0 0 10px 0; font-size: 1em; color: #666;">Summary: ${
+              <p style="margin: 0 0 10px 0; font-size: 1em; color: #666; min-height: 80px;">Summary: ${
                 content.summary
               }</p>
               <button style="padding: 10px 20px; border: none; border-radius: 5px; background-color: ${
                 Math.random() > 0.5 ? "#007bff" : "#28a745"
-              }; color: #fff; cursor: pointer; margin-top: 10px; margin: auto 0;">${
+              }; color: #fff; cursor: pointer; margin-top: 10px; display: block; margin: 0 auto;">${
                     Math.random() > 0.5 ? "Purchase" : "Access"
                   }</button>
               </a>`
@@ -170,11 +169,7 @@ const ChatUI = () => {
             <InfoButton />
           </ConversationHeader.Actions>
         </ConversationHeader>
-        <MessageList
-          typingIndicator={
-            <TypingIndicator content="Terry Crews is thinking" />
-          }
-        >
+        <MessageList>
           {splitMessages(messages).map((msg, index) => {
             return (
               <React.Fragment key={index}>
