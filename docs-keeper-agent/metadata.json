@@ -1,0 +1,110 @@
+[
+  {
+    "title": "Cyber Security Audit Checklist",
+    "summary": "A comprehensive checklist for conducting cyber security audits, including governance, risk management, protection, incident response, monitoring, and user access controls.",
+    "price": 89.99,
+    "has_checklist": true,
+    "has_policy": true,
+    "has_safe_operating_procedure": false,
+    "has_report": false,
+    "has_template": false,
+    "has_manual": false,
+    "path": "CompliSpaceAssurance/Cyber Security/Cyber Security/Cyber Security Audit Checklist.json"
+  },
+  {
+    "title": "Cyber Security Incident Register",
+    "summary": "A structured document template for recording, remediating, and reviewing cyber security incidents, including reports, action plans, and incident reviews.",
+    "price": 74.99,
+    "has_checklist": true,
+    "has_policy": true,
+    "has_safe_operating_procedure": false,
+    "has_report": true,
+    "has_template": true,
+    "has_manual": false,
+    "path": "CompliSpaceAssurance/Cyber Security/Cyber Security/Cyber Security Incident Register.json"
+  },
+  {
+    "title": "Cyber Security Risk Control Effectiveness Survey",
+    "summary": "A checklist assessing the effectiveness of cyber security practices, policies, and measures within an organization, covering training, asset management, and breach responses.",
+    "price": 85.99,
+    "has_checklist": true,
+    "has_policy": true,
+    "has_safe_operating_procedure": false,
+    "has_report": false,
+    "has_template": true,
+    "has_manual": false,
+    "path": "CompliSpaceAssurance/Cyber Security/Cyber Security/Cyber Security Risk Control Effectiveness Survey.json"
+  },
+  {
+    "title": "Information and Technology Asset Register Template",
+    "summary": "A structured template for managing information and technology assets, including asset details, ownership, access controls, cybersecurity risks, and risk mitigation measures.",
+    "price": 74.99,
+    "has_checklist": true,
+    "has_policy": true,
+    "has_safe_operating_procedure": false,
+    "has_report": false,
+    "has_template": true,
+    "has_manual": false,
+    "path": "CompliSpaceAssurance/Cyber Security/Cyber Security/Information and Technology Asset Register.json"
+  },
+  {
+    "title": "JSON Import Template and Risk Management Guide",
+    "summary": "A step-by-step guide for handling JSON import templates, managing risk classifications, and uploading data to a customer site.",
+    "price": 84.99,
+    "has_checklist": true,
+    "has_policy": false,
+    "has_safe_operating_procedure": false,
+    "has_report": false,
+    "has_template": true,
+    "has_manual": true,
+    "path": "CompliSpaceAssurance/Cyber Security/Cyber Security/Risk Register/1 Instructions to Deploy Cyber Security Risk Register.boxnote"
+  },
+  {
+    "title": "Cyber Security Risk Register",
+    "summary": "A structured template to manage and assess cyber security risks, with customizable fields for identifying risks, consequences, and control strategies.",
+    "price": 85.5,
+    "has_checklist": true,
+    "has_policy": false,
+    "has_safe_operating_procedure": false,
+    "has_report": false,
+    "has_template": true,
+    "has_manual": false,
+    "path": "CompliSpaceAssurance/Cyber Security/Cyber Security/Risk Register/2 Cyber Security Risk Register (without Risk Classification and Risk Flag).json"
+  },
+  {
+    "title": "Risk Management Data Structure Overview",
+    "summary": "This document outlines key fields and classifications for managing risk, including risk descriptions, classifications, flags, and responsibilities.",
+    "price": 86.75,
+    "has_checklist": false,
+    "has_policy": false,
+    "has_safe_operating_procedure": false,
+    "has_report": false,
+    "has_template": true,
+    "has_manual": false,
+    "path": "CompliSpaceAssurance/Cyber Security/Cyber Security/Risk Register/3 Cyber Security Risk Register Order of Fields.pdf"
+  },
+  {
+    "title": "Cyber Security Risk Register",
+    "summary": "A detailed document outlining various cyber security risks, their potential consequences, classifications, and key responsibilities for mitigation within an organization.",
+    "price": 84.75,
+    "has_checklist": false,
+    "has_policy": true,
+    "has_safe_operating_procedure": false,
+    "has_report": false,
+    "has_template": false,
+    "has_manual": false,
+    "path": "CompliSpaceAssurance/Cyber Security/Cyber Security/Risk Register/4 Cyber Security Risk Register Upload Spreadsheet.csv"
+  },
+  {
+    "title": "Archived Document Metadata",
+    "summary": "The content appears to be an archived document with multiple parts, including settings, styles, relationships, footnotes, and numbering.",
+    "price": 88.45,
+    "has_checklist": false,
+    "has_policy": false,
+    "has_safe_operating_procedure": false,
+    "has_report": false,
+    "has_template": true,
+    "has_manual": false,
+    "path": "CompliSpaceAssurance/Cyber Security/Cyber Security/Risk Register/Cyber Security Possible Risk Controls and Treatments (1).docx"
+  }
+]
