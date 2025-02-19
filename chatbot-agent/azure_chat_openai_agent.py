@@ -1,5 +1,5 @@
 from langchain_openai import AzureChatOpenAI
-from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain.output_parsers import ResponseSchema, StructuredOutputParser
 from chroma_knowledge_base_agent import ChromaKnowledgeBaseAgent
 # from utils.string_utils import clean_json_string
@@ -22,19 +22,25 @@ class AzureChatOpenAIAgent:
             max_retries=2,
         )
 
-        response_schemas = [
-            ResponseSchema(name="id", description="ID of the content"),
-            ResponseSchema(name="title", description="Title of the content"),
-            ResponseSchema(name="summary", description="Summary of the content"),
-            ResponseSchema(name="price", description="Price of the content"),
-        ]
+        # response_schemas = [
+        #     ResponseSchema(name="id", description="ID of the content"),
+        #     ResponseSchema(name="title", description="Title of the content"),
+        #     ResponseSchema(name="summary", description="Summary of the content"),
+        #     ResponseSchema(name="price", description="Price of the content"),
+        # ]
 
         knowledge_base_agent = ChromaKnowledgeBaseAgent
         knowledge_base = knowledge_base_agent.retrieve(user_prompt)
-        output_parser = StructuredOutputParser.from_response_schemas(response_schemas)
+        # output_parser = StructuredOutputParser.from_response_schemas(response_schemas)
+
+        # Convert user_prompt_history to the desired format
+        past_conversation = [
+            (message['role'], message['content']) for message in user_prompt_history
+        ]
 
         prompt = ChatPromptTemplate.from_messages(
              [
+                MessagesPlaceholder("past_conversation"),
                 (
                     "system",
                     """
@@ -73,9 +79,9 @@ class AzureChatOpenAIAgent:
         response = chain.invoke({
             "input_language": "English",
             "output_language": "English",
-            "user_prompt": user_prompt,
             "knowledge_base": knowledge_base,
-            "output_format": output_parser.get_format_instructions(),
+            "user_prompt": user_prompt,
+            "past_conversation": past_conversation
         })
 
         # print(response.content)
