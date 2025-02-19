@@ -3,8 +3,6 @@ from chat import chat
 
 app = Flask(__name__)
 
-print(chat("What'sup?").content)
-
 @app.route("/invoke", methods=["POST"])
 def invoke_model():
     try:
@@ -12,7 +10,6 @@ def invoke_model():
         data = request.get_json()
         prompt = data.get("prompt", "")
         conversation_history = data.get("conversationHistory", [])
-        print(conversation_history)
         if not prompt:
             return jsonify({"error": "Message is required"}), 400
 
@@ -21,7 +18,7 @@ def invoke_model():
                     prompt=prompt,
                     conversation_history=conversation_history)
 
-        return jsonify({"response": response.content})
+        return jsonify({"response": response})
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500

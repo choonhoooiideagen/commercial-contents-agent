@@ -1,10 +1,7 @@
 from langchain_openai import AzureChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
-from langchain.output_parsers import ResponseSchema, StructuredOutputParser
 from chroma_knowledge_base_agent import ChromaKnowledgeBaseAgent
-# from utils.string_utils import clean_json_string
 from dotenv import load_dotenv
-# import json
 import os
 
 load_dotenv()
@@ -22,16 +19,9 @@ class AzureChatOpenAIAgent:
             max_retries=2,
         )
 
-        # response_schemas = [
-        #     ResponseSchema(name="id", description="ID of the content"),
-        #     ResponseSchema(name="title", description="Title of the content"),
-        #     ResponseSchema(name="summary", description="Summary of the content"),
-        #     ResponseSchema(name="price", description="Price of the content"),
-        # ]
 
         knowledge_base_agent = ChromaKnowledgeBaseAgent
         knowledge_base = knowledge_base_agent.retrieve(user_prompt)
-        # output_parser = StructuredOutputParser.from_response_schemas(response_schemas)
 
         # Convert user_prompt_history to the desired format
         past_conversation = [
@@ -61,6 +51,8 @@ class AzureChatOpenAIAgent:
                             {{
                                 "id": 1,
                                 "title": "Learn Spanish",
+                                "summary": "Learn Spanish in 30 days",
+                                "path": "path/to/content",
                                 "price": 10
                             }}
                         ]
@@ -84,10 +76,4 @@ class AzureChatOpenAIAgent:
             "past_conversation": past_conversation
         })
 
-        # print(response.content)
         return response.content
-
-        # response_clean = clean_json_string(response.content)
-        # response_json = json.loads(response_clean)
-        # print(f"Answer: {response_json}\n")
-        # return response_json

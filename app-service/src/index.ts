@@ -70,12 +70,16 @@ const messages: Message[] = [
         {
           "id": 1,
           "title": "Learn Spanish",
+          "summary": "Learn Spanish with our interactive lessons.",
+          "path": "/learn-spanish",
           "price": 10
           
         },
                 {
           "id": 2,
           "title": "Learn English",
+          "summary": "Learn English with our interactive lessons.",
+          "path": "/learn-english",
           "price": 10
           
         }
@@ -149,16 +153,6 @@ io.on("connection", (socket) => {
     console.log("user disconnected");
   });
 
-  // setInterval(() => {
-  //   const message: Message = {
-  //     sender: "Terry Crews",
-  //     content: "This is a random message from Terry Crews!",
-  //     timestamp: new Date()
-  //   };
-
-  //   messages.push(message);
-  //   io.emit("receiveMessage", message);
-  // }, 5000);
 });
 
 // Start Server
