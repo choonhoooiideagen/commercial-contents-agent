@@ -14,12 +14,25 @@ import {
 } from "@chatscope/chat-ui-kit-react";
 import React, { useEffect, useState } from "react";
 import { io } from "socket.io-client";
+import { splitMessages } from "./splitContent";
 const socket = io("http://localhost:8080"); // Adjust the URL as needed
 
-interface Message {
+export interface Message {
   sender: string;
   content: string;
   timestamp: Date;
+  type?: string;
+}
+
+export interface TransformedMessage {
+  sender: string;
+  content: string | ContentList;
+  timestamp: Date;
+  type?: string;
+}
+
+export interface ContentList {
+  contents: { id: string; title: string; price: number }[];
 }
 
 const ChatUI = () => {
@@ -58,6 +71,59 @@ const ChatUI = () => {
     socket.emit("sendMessage", message);
   };
 
+  const getChatType = (msg: TransformedMessage) => {
+    switch (msg.type) {
+      case undefined:
+        return (
+          <Message
+            model={{
+              direction: msg.sender === "Terry Crews" ? "incoming" : "outgoing",
+              message: msg.content as string,
+              position: "single",
+              sender: msg.sender,
+              sentTime: new Date(msg.timestamp).toLocaleTimeString(),
+            }}
+          >
+            <Avatar
+              name="Terry Crews"
+              src="https://chatscope.io/storybook/react/assets/zoe-E7ZdmXF0.svg"
+            />
+          </Message>
+        );
+      case "documentJson":
+        console.log(msg.content);
+        return (
+          <Message
+            model={{
+              direction: msg.sender === "Terry Crews" ? "incoming" : "outgoing",
+              message: "",
+              position: "single",
+              sender: msg.sender,
+              sentTime: new Date(msg.timestamp).toLocaleTimeString(),
+            }}
+          >
+            <Message.HtmlContent
+              html={`<div style="display: flex; flex-wrap: wrap; gap: 20px; padding: 20px; border: 1px solid #e0e0e0; border-radius: 12px; background-color: #f5f5f5;">
+              ${(typeof msg.content !== "string" &&
+              Array.isArray(msg.content.contents)
+                ? msg.content.contents
+                : []
+              )
+                .map(
+                  (content) => `
+              <a href="/content/${content.id}" style="flex: 1 1 calc(50% - 20px); box-sizing: border-box; margin-bottom: 20px; padding: 15px; border: 1px solid #ddd; border-radius: 12px; background-color: #fff; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.2)';" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 2px 4px rgba(0, 0, 0, 0.1)';">
+              <h3 style="margin: 0 0 10px 0; font-size: 1.2em; color: #333; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${content.title}</h3>
+              <p style="margin: 0 0 10px 0; font-size: 1em; color: #666;">Price: <span style="font-weight: bold; color: #000;">$${content.price}</span></p>
+              </a>`
+                )
+                .join("")}
+              </div>`}
+            />
+          </Message>
+        );
+    }
+  };
+
   return (
     <div style={{ height: "100vh", width: "100vw" }}>
       <ChatContainer
@@ -86,37 +152,18 @@ const ChatUI = () => {
             <TypingIndicator content="Terry Crews is thinking" />
           }
         >
-          {messages.map((msg, index) => {
-            const match = msg.content.match(
-              /#contents-list([\s\S]*?)#end-contents-list/
-            );
-            let contents;
-            if (match !== null) contents = JSON.parse(match[1].trim()).contents;
-            console.log(contents);
+          {splitMessages(messages).map((msg, index) => {
             return (
               <React.Fragment key={index}>
                 {index === 0 ||
-                new Date(messages[index - 1].timestamp).toDateString() !==
-                  new Date(msg.timestamp).toDateString() ? (
+                new Date(
+                  splitMessages(messages)[index - 1].timestamp
+                ).toDateString() !== new Date(msg.timestamp).toDateString() ? (
                   <MessageSeparator
                     content={new Date(msg.timestamp).toDateString()}
                   />
                 ) : null}
-                <Message
-                  model={{
-                    direction:
-                      msg.sender === "Terry Crews" ? "incoming" : "outgoing",
-                    message: msg.content,
-                    position: "single",
-                    sender: msg.sender,
-                    sentTime: new Date(msg.timestamp).toLocaleTimeString(),
-                  }}
-                >
-                  <Avatar
-                    name="Terry Crews"
-                    src="https://chatscope.io/storybook/react/assets/zoe-E7ZdmXF0.svg"
-                  />
-                </Message>
+                {getChatType(msg)}
               </React.Fragment>
             );
           })}

@@ -72,10 +72,18 @@ const messages: Message[] = [
           "title": "Learn Spanish",
           "price": 10
           
+        },
+                {
+          "id": 2,
+          "title": "Learn English",
+          "price": 10
+          
         }
       ]
       }
       #end-contents-list
+
+      Lookinh
     `,
     timestamp: new Date("2023-10-02T09:00:00Z"),
   },
