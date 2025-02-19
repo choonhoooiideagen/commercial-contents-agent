@@ -1,5 +1,6 @@
 from PyPDF2 import PdfReader
 from io import BytesIO
+from transformers import GPT2Tokenizer
 import json
 
 
@@ -55,3 +56,21 @@ def write_to_db(data: dict) -> bool:
     # Write the data back to the database
     with open("metadata.json", "w") as f:
         json.dump(existing_data, f, indent=2) 
+
+
+def count_tokens(text: str) -> int:
+    """
+    Counts the number of tokens in the text.
+    Args:
+        text (str): The text to count the tokens for.
+    Returns:
+        int: The number of tokens in the text.
+    """
+    # Initialize the tokenizer
+    tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
+
+    # Tokenize the text
+    tokens = tokenizer.tokenize(text)
+    num_tokens = len(tokens)
+
+    return num_tokens
