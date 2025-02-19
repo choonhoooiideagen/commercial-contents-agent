@@ -30,10 +30,11 @@ def invoke_agent(user_input):
     response = bedrock_agent_client.invoke_agent(agentAliasId=agent_alias_id, agentId=agent_id, sessionId=str(uuid.uuid4()), inputText=user_input)
 
     # Yield streamed events and capture response text
-    responses = []
+    response_text = ""
     for event in response["completion"]:
-        responses.append({
-            "text": event["chunk"]["attribution"]["citations"][0]["generatedResponsePart"]["textResponsePart"]["text"]
-        })
+        if "chunk" in event:
+            chunk_text = event["chunk"].get("text", "")
+            response_text += chunk_text
+            yield chunk_text  # Yield each chunk for streaming
 
-    return responses  # Return final response after streaming
+    return response_text  # Return final response after streaming
