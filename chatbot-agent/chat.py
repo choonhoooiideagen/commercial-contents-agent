@@ -1,13 +1,8 @@
 from langchain_openai import AzureChatOpenAI
 import config
+from azure_chat_openai_agent import AzureChatOpenAIAgent
 
-def chat(prompt, **kwargs):
+def chat(prompt, conversation_history, **kwargs):
 
-    llm = AzureChatOpenAI(
-            api_key=config.open_ai_api_key,
-            azure_endpoint=config.open_ai_endpoint,
-            api_version=config.open_ai_api_version,
-            deployment_name=config.open_ai_model,
-            )
-    
-    return llm.invoke(input=prompt)
+        agent = AzureChatOpenAIAgent
+        return agent.converse(user_info=None, user_prompt=prompt, user_prompt_history=conversation_history)

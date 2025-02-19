@@ -1,6 +1,5 @@
-import os
-
-open_ai_model = os.getenv("open_ai_model")
-open_ai_api_key = os.getenv("open_ai_api_key")
-open_ai_endpoint = os.getenv("open_ai_endpoint")
-open_ai_api_version = os.getenv("open_ai_api_version")
+azure_openai_api_key="G1hmHSyJWSer9BPRMmWYUTSNE4uuvY80bzpak9Yf1LzwHDXVxFhgJQQJ99BBACfhMk5XJ3w3AAABACOGOPyy"
+azure_openai_endpoint="https://hackathon-thecrewo6.openai.azure.com"
+azure_openai_deployment="gpt-4o"
+azure_openai_embedding_deployment_name=" text-embedding-3-large"
+azure_openai_api_version="2023-06-01-preview"
